@@ -13,4 +13,5 @@
     <string name="next_week_notes">Next week notes</string>
     <string name="finished_notes">Finished notes</string>
     <string name="tools">Tools</string>
+    <string name="ic_have_reminder">ic_have_reminder</string>
 </resources>
