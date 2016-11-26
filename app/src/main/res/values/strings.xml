@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MyNotes</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="ok">OK</string>
+    <string name="settings">Settings</string>
+    <string name="about_app">About app</string>
+    <string name="today_notes">Today notes</string>
+    <string name="tomorrow_notes">Tomorrow notes</string>
+    <string name="next_week_notes">Next week notes</string>
+    <string name="finished_notes">Finished notes</string>
+    <string name="tools">Tools</string>
+</resources>
