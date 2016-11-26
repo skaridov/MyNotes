@@ -14,4 +14,7 @@
     <string name="finished_notes">Finished notes</string>
     <string name="tools">Tools</string>
     <string name="ic_have_reminder">ic_have_reminder</string>
+    <string name="remind_me">Remind me</string>
+    <string name="enter_your_note">Enter your note</string>
+    <string name="set_finish_date">Set finish date</string>
 </resources>

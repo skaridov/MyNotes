@@ -3,13 +3,23 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edittext_new_note_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:id="@+id/dialog_new_note_nameinput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_note" />
 
     <TextView
-        android:id="@+id/text_new_note_date"
-        android:layout_width="match_parent"
+        android:id="@+id/dialog_new_note_dateinput"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edittext_new_note_name"/>
+        android:layout_below="@id/dialog_new_note_nameinput"
+        android:text="@string/set_finish_date" />
+
+    <CheckBox
+        android:id="@+id/dialog_new_note_checkreminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_new_note_dateinput"
+        android:text="@string/remind_me"
+        android:checked="false" />
 </RelativeLayout>
