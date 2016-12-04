@@ -7,19 +7,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/enter_your_note" />
-
-    <TextView
-        android:id="@+id/dialog_new_note_dateinput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/dialog_new_note_nameinput"
-        android:text="@string/set_finish_date" />
-
-    <CheckBox
-        android:id="@+id/dialog_new_note_checkreminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/dialog_new_note_dateinput"
-        android:text="@string/remind_me"
-        android:checked="false" />
 </RelativeLayout>

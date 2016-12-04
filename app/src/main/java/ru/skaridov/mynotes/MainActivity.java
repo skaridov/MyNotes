@@ -1,5 +1,6 @@
 package ru.skaridov.mynotes;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,13 +25,16 @@ import ru.skaridov.mynotes.classes.DBHelper;
 import ru.skaridov.mynotes.classes.MyRecyclerAdapter;
 import ru.skaridov.mynotes.classes.TaskNote;
 import ru.skaridov.mynotes.dialogs.NewNoteDialogFragment;
+import ru.skaridov.mynotes.dialogs.NoteOptionsDialogFragment;
+import ru.skaridov.mynotes.interfaces.OnItemClickListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnItemClickListener {
 
     DBHelper dbHelper;
     ArrayList<TaskNote> notesToShowArray;
     RecyclerView recyclerView;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +47,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager manager = getSupportFragmentManager();
-                NewNoteDialogFragment newNoteDialogFragment = new NewNoteDialogFragment();
-                newNoteDialogFragment.show(manager, "new note");
+                createNewNote();
             }
         });
 
@@ -57,9 +60,22 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        context = this;
         dbHelper = new DBHelper(this);
         notesToShowArray = new ArrayList<>();
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+    }
 
+    private void createNewNote() {
+        FragmentManager manager = getSupportFragmentManager();
+        NewNoteDialogFragment newNoteDialogFragment = new NewNoteDialogFragment();
+        newNoteDialogFragment.show(manager, "new note");
+    }
+
+    public void onItemClick(TaskNote note, TextView textName) {
+        FragmentManager manager = getSupportFragmentManager();
+        NoteOptionsDialogFragment noteOptionsDialogFragment = new NoteOptionsDialogFragment();
+        noteOptionsDialogFragment.show(manager, "note options", note);
     }
 
     @Override
@@ -80,9 +96,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onResume() {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        MyRecyclerAdapter adapter = new MyRecyclerAdapter(notesToShowArray);
+        MyRecyclerAdapter adapter = new MyRecyclerAdapter(notesToShowArray, this);
         recyclerView.setAdapter(adapter);
         super.onResume();
     }
@@ -144,9 +159,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void okClicked(String s) {
+    public void okClickedNewNote(String s) {
         TaskNote newNote = new TaskNote(s, Calendar.getInstance(), DBContract.CyclesTable.NON_CYCLE);
         notesToShowArray.add(newNote);
         dbHelper.saveNewNoteToDatabase(newNote);
+    }
+
+    public void okClickedNoteOptions(String s, TaskNote note) {
+        note.setName(s);
+        dbHelper.updateNoteInDatabase(note);
     }
 }

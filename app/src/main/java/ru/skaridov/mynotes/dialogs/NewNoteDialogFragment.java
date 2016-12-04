@@ -32,6 +32,7 @@ public class NewNoteDialogFragment extends DialogFragment {
     Calendar myCalendar;
     Context context;
     DatePickerDialog.OnDateSetListener date;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -39,19 +40,22 @@ public class NewNoteDialogFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_new_note, null);
         builder.setView(view);
-        tvDate = (TextView) getDialog().findViewById(R.id.dialog_new_note_dateinput);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 et = (EditText) getDialog().findViewById(R.id.dialog_new_note_nameinput);
-                ((MainActivity) getActivity()).okClicked(et.getText().toString());
+                ((MainActivity) getActivity()).okClickedNewNote(et.getText().toString());
                 //Toast.makeText(null, et.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
         context = getContext();
-        setListenerDatePicker();
+
         return builder.create();
+    }
+
+    public void onClickSelectFinishDate() {
+
     }
 
     private void setListenerDatePicker() {
